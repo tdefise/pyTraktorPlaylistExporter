@@ -9,7 +9,6 @@ TRACK_LIST = []
 def parse_collection(playlist):
 
     defusedxml.defuse_stdlib()
-
     tree = defusedxml.ElementTree.parse(COLLECTION)
 
     for a in tree.iter(tag="NODE"):
@@ -34,7 +33,10 @@ def arg_processing(argv):
         elif opt in ("-p", "--playlist"):
             return arg
 
+        print("{} are not valid argument".format(args))
+        sys.exit(2)
 
+        
 def main(argv):
     if len(argv) == 0:
         print("pyTraktorPlaylistExporter.py -p <TraktorPlaylist>")
