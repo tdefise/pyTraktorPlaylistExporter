@@ -1,6 +1,9 @@
+path_classifiers:
+  docs:
+    - README.md
 extraction:
   python:
-    python_setup: 
+    python_setup:
       version: 3
-      requirements_files: 
+      requirements_files:
         - requirements.txt

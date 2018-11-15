@@ -28,7 +28,7 @@ def arg_processing(argv):
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print ('test.py -i <inputfile> -o <outputfile>')
+            print('test.py -i <inputfile> -o <outputfile>')
             sys.exit(2)
         elif opt in ("-p", "--playlist"):
             return arg
@@ -36,9 +36,9 @@ def arg_processing(argv):
         print("{} are not valid argument".format(args))
         sys.exit(2)
 
-        
+
 def main(argv):
-    if len(argv) == 0:
+    if argv:
         print("pyTraktorPlaylistExporter.py -p <TraktorPlaylist>")
         sys.exit(2)
 
@@ -50,5 +50,4 @@ def main(argv):
 
 if __name__ == '__main__':
     main(sys.argv[1:])
-
-
+	
