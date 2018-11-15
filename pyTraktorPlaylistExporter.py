@@ -13,7 +13,8 @@ def parse_collection(playlist):
     for a in tree.iter(tag="NODE"):
         if a.get("NAME") == playlist:
             for z in a.iter(tag="PRIMARYKEY"):
-                TRACK_LIST.append(z.get("KEY").replace("/:", "\\"))
+                windows_path_track = z.get("KEY").replace("/:", "\\")
+                TRACK_LIST.append(windows_path_track)
 
     return TRACK_LIST
 
