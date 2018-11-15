@@ -1,4 +1,4 @@
-import xml.etree.ElementTree as ET
+import defusedxml
 import getopt
 import sys
 
@@ -7,8 +7,11 @@ TRACK_LIST = []
 
 
 def parse_collection(playlist):
-    parser = ET.XMLParser(encoding="utf-8")
-    tree = ET.parse(COLLECTION, parser=parser)
+
+    defusedxml.defuse_stdlib()
+
+    parser = defusedxml.ElementTree.XMLParser(encoding="utf-8")
+    tree = defusedxml.ElementTree.parse(COLLECTION, parser=parser)
 
     for a in tree.iter(tag="NODE"):
         if a.get("NAME") == playlist:
@@ -20,7 +23,6 @@ def parse_collection(playlist):
 
 
 def arg_processing(argv):
-    playlist = ""
     try:
         opts, args = getopt.getopt(argv, "hp:", ["playlist="])
     except getopt.GetoptError:
@@ -28,8 +30,8 @@ def arg_processing(argv):
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            'test.py -i <inputfile> -o <outputfile>'
-            sys.exit()
+            print ('test.py -i <inputfile> -o <outputfile>')
+            sys.exit(2)
         elif opt in ("-p", "--playlist"):
             return arg
 
