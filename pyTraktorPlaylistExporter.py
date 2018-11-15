@@ -10,8 +10,7 @@ def parse_collection(playlist):
 
     defusedxml.defuse_stdlib()
 
-    parser = defusedxml.ElementTree.XMLParser(encoding="utf-8")
-    tree = defusedxml.ElementTree.parse(COLLECTION, parser=parser)
+    tree = defusedxml.ElementTree.parse(COLLECTION)
 
     for a in tree.iter(tag="NODE"):
         if a.get("NAME") == playlist:
