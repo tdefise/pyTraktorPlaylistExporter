@@ -29,17 +29,15 @@ def arg_processing(argv):
     try:
         opts, args = getopt.getopt(argv, "hp:", ["playlist="])
     except getopt.GetoptError:
-        print("pyTraktorPlaylistExporter__.py -p <TraktorPlaylist>")
+        print("pyTraktorPlaylistExporter.py -p <TraktorPlaylist>")
         sys.exit(2)
+
     for opt, arg in opts:
         if opt == '-h':
             print('test.py -i <inputfile> -o <outputfile>')
             sys.exit(2)
         elif opt in ("-p", "--playlist"):
             return arg
-
-        print("{} are not valid argument".format(args))
-        sys.exit(2)
 
 
 def main(argv):
