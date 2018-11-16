@@ -21,6 +21,11 @@ def parse_collection(playlist):
 
 
 def arg_processing(argv):
+
+    if not argv:
+        print("pyTraktorPlaylistExporter.py -p <TraktorPlaylist>")
+        sys.exit(2)
+
     try:
         opts, args = getopt.getopt(argv, "hp:", ["playlist="])
     except getopt.GetoptError:
@@ -38,9 +43,6 @@ def arg_processing(argv):
 
 
 def main(argv):
-    if argv:
-        print("pyTraktorPlaylistExporter.py -p <TraktorPlaylist>")
-        sys.exit(2)
 
     playlist = arg_processing(argv)
     TRACK_LIST = parse_collection(playlist)
