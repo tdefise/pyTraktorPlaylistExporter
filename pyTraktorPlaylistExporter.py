@@ -12,7 +12,7 @@ def parse_collection(playlist):
     defusedxml.defuse_stdlib()
     tree = defusedxml.ElementTree.parse(collection)
     track_list = list()
-	
+
     for a in tree.iter(tag="NODE"):
         if a.get("NAME") == playlist:
             for z in a.iter(tag="PRIMARYKEY"):
