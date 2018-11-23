@@ -2,22 +2,24 @@ import defusedxml
 import getopt
 import sys
 
-COLLECTION = r"C:\Users\Thomas.defise\Documents\Native Instruments\Traktor 2.11.3\collection.nml"
+
 TRACK_LIST = []
 
 
 def parse_collection(playlist):
+    collection = r"C:\Users\Thomas.defise\Documents\Native Instruments\Traktor 2.11.3\collection.nml"
 
     defusedxml.defuse_stdlib()
-    tree = defusedxml.ElementTree.parse(COLLECTION)
-
+    tree = defusedxml.ElementTree.parse(collection)
+    track_list = list()
+	
     for a in tree.iter(tag="NODE"):
         if a.get("NAME") == playlist:
             for z in a.iter(tag="PRIMARYKEY"):
                 windows_path_track = z.get("KEY").replace("/:", "\\")
-                TRACK_LIST.append(windows_path_track)
+                track_list.append(windows_path_track)
 
-    return TRACK_LIST
+    return track_list
 
 
 def arg_processing(argv):
@@ -27,7 +29,7 @@ def arg_processing(argv):
         sys.exit(2)
 
     try:
-        opts, args = getopt.getopt(argv, "hp:", ["playlist="])
+        opts, _ = getopt.getopt(argv, "hp:", ["playlist="])
     except getopt.GetoptError:
         print("pyTraktorPlaylistExporter.py -p <TraktorPlaylist>")
         sys.exit(2)
@@ -43,11 +45,10 @@ def arg_processing(argv):
 def main(argv):
 
     playlist = arg_processing(argv)
-    TRACK_LIST = parse_collection(playlist)
+    track_list = parse_collection(playlist)
 
-    print(TRACK_LIST)
+    print(track_list)
 
 
 if __name__ == '__main__':
     main(sys.argv[1:])
-	
